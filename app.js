@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const app = express();
 const Campground = require('./models/campgrounds');
 const campgrounds = require('./models/campgrounds');
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp');
 
@@ -14,8 +14,11 @@ db.once("open", ()=>{
     console.log("Database connected");
 });
 
+const app = express();
+
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,'views'));
+app.engine('ejs',ejsMate);
 
 app.use(express.urlencoded({extended: true}));
 // parses the url encoded data such as request body into a javascript object
