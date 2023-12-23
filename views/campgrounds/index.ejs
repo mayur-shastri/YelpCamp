@@ -13,7 +13,14 @@
                 <div class="card mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <img class="img-fluid" src="<%= campground.image %>">
+                            <style>
+                                .img-fluid {
+                                    width: 100%;  /* Set the width of the image */
+                                    height: 200px;  /* Set the height of the image */
+                                    object-fit: cover;  /* Scale and crop the image to fit its container */
+                                }
+                            </style> 
+                            <img class="img-fluid" src="<%= campground.images[0].url %>">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">

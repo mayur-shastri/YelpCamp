@@ -4,7 +4,32 @@
     <div class="row">
         <div class="col-6">
             <div class="card mb-3">
-                <img src="<%= campground.image %>" class="card-img-top">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                    <% campground.images.forEach((img,i)=>{ %>
+                            <style>
+                                .carousel-item img {
+                                    width: 100%;  /* Set the width of the image */
+                                    height: 400px;  /* Set the height of the image */
+                                    object-fit: cover;  /* Scale and crop the image to fit its container */
+                                }
+                            </style> 
+                            <div class="carousel-item <%= i === 0 ? 'active' : '' %>">     
+                              <img src="<%= img.url %>" class="d-block w-100" alt="">
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% if(campground.images.length > 1) { %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    <% } %>
+                    </button>
+                  </div>
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= campground.title %>
@@ -40,7 +65,6 @@
                     novalidate>
                     <h2>Leave a Review</h2>
                     <div class="mb-3">
-                        <!-- <input type="range" class="form-range" min="1" max="5" name="review[rating]" id="rating"> -->
                         <fieldset class="starability-basic">
                             <legend>Rating:</legend>
                             <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />

@@ -4,7 +4,10 @@ const campgroundSchema = Joi.object({
     campground: Joi.object({
         title: Joi.string().required(),
         price: Joi.number().required().min(0),
-        image: Joi.string().required(),
+        images: Joi.array().items(Joi.object({
+            url: Joi.string().required(),
+            filename: Joi.string().required(),
+        })),
         location: Joi.string().required(),
         description: Joi.string().required(),
     }).required(),
