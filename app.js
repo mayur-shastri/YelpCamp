@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./Utilities/ExpressError');
 const User = require('./models/user');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
@@ -46,6 +47,7 @@ app.engine('ejs',ejsMate);
 
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(mongoSanitize());
 
 app.use(express.urlencoded({extended: true}));
 // parses the url encoded data such as request body into a javascript object

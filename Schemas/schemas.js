@@ -11,6 +11,9 @@ const campgroundSchema = Joi.object({
         location: Joi.string().required(),
         description: Joi.string().required(),
     }).required(),
+    imagesToDelete: Joi.array().items(
+        Joi.number(),
+    ),
 });
 
 const reviewSchema = Joi.object({

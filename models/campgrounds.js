@@ -20,7 +20,24 @@ const CampgroundSchema = Schema({
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review',
-    }]
+    }],
+    imagesToDelete: [
+        {
+            url: String,
+            filename: String,
+        }
+    ],
+    // geometry: {
+    //     type: {
+    //         type: String,
+    //         enum: ['Point'],
+    //         required: true,
+    //     },
+    //     coordinates: {
+    //         type: [Number],
+    //         required: true,
+    //     },
+    // },
 });
 
 CampgroundSchema.post('findOneAndDelete', async (campground)=>{
