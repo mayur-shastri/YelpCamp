@@ -27,17 +27,17 @@ const CampgroundSchema = Schema({
             filename: String,
         }
     ],
-    // geometry: {
-    //     type: {
-    //         type: String,
-    //         enum: ['Point'],
-    //         required: true,
-    //     },
-    //     coordinates: {
-    //         type: [Number],
-    //         required: true,
-    //     },
-    // },
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true,
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+        },
+    },
 });
 
 CampgroundSchema.post('findOneAndDelete', async (campground)=>{

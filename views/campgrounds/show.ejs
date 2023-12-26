@@ -1,35 +1,40 @@
 <%layout('layouts/boilerplate') %>
     <link rel="stylesheet" href="/stylesheets/stars.css">
-
     <div class="row">
         <div class="col-6">
+            <div id='map' style='width: 100%; height: 300px;'></div>
             <div class="card mb-3">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                    <% campground.images.forEach((img,i)=>{ %>
+                        <% campground.images.forEach((img,i)=>{ %>
                             <style>
                                 .carousel-item img {
-                                    width: 100%;  /* Set the width of the image */
-                                    height: 400px;  /* Set the height of the image */
-                                    object-fit: cover;  /* Scale and crop the image to fit its container */
+                                    width: 100%;
+                                    /* Set the width of the image */
+                                    height: 400px;
+                                    /* Set the height of the image */
+                                    object-fit: cover;
+                                    /* Scale and crop the image to fit its container */
                                 }
-                            </style> 
-                            <div class="carousel-item <%= i === 0 ? 'active' : '' %>">     
-                              <img src="<%= img.url %>" class="d-block w-100" alt="">
+                            </style>
+                            <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                                <img src="<%= img.url %>" class="d-block w-100" alt="">
                             </div>
                             <% }) %>
                     </div>
-                    <% if(campground.images.length > 1) { %>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    <% } %>
-                    </button>
-                  </div>
+                    <% if(campground.images.length> 1) { %>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                            <% } %>
+                        </button>
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= campground.title %>
@@ -67,7 +72,8 @@
                     <div class="mb-3">
                         <fieldset class="starability-basic">
                             <legend>Rating:</legend>
-                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0"
+                                checked aria-label="No rating." />
                             <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                             <label for="first-rate1" title="Terrible">1 star</label>
                             <input type="radio" id="first-rate2" name="review[rating]" value="2" />
@@ -78,7 +84,7 @@
                             <label for="first-rate4" title="Very good">4 stars</label>
                             <input type="radio" id="first-rate5" name="review[rating]" value="5" />
                             <label for="first-rate5" title="Amazing">5 stars</label>
-                          </fieldset>
+                        </fieldset>
                     </div>
                     <div class="mb-3">
                         <label for="body" class="form-label">Review</label>
@@ -102,7 +108,8 @@
                                 </h6>
                                 </p>
                                 <p class="card-text">
-                                    <strong>Review:</strong> <%= review.body %>
+                                    <strong>Review:</strong>
+                                    <%= review.body %>
                                 </p>
                                 <% if(currentUser && review.author.equals(currentUser._id)){ %>
                                     <form
@@ -118,3 +125,8 @@
                         <% } %>
         </div>
     </div>
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN %>';
+    const campData = '<%- JSON.stringify(campground) %>';
+</script>
+<script src="/javascripts/showPageMap.js"></script>

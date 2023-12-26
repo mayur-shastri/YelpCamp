@@ -3,7 +3,6 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geoCoder = mbxGeocoding({accessToken: mapBoxToken});
 const cloudinary = require('cloudinary').v2;
-// const folderPath = 'YelpCamp';  // path of the images folder in cloudinary
 
 module.exports.index = async (req,res)=>{
     const campgrounds = await Campground.find({});
@@ -15,14 +14,14 @@ module.exports.renderNewForm =  (req,res)=>{
 }
 
 module.exports.create = async (req,res,next)=>{
-    // const geoData = await geoCoder.forwardGeocode({
-    //     query: req.body.campground.location,
-    //     limit: 1,
-    // }).send();
-    // const features = await geoData.body.features;
-    // const geometry = features[0].geometry;
+    const geoData = await geoCoder.forwardGeocode({
+        query: req.body.campground.location,
+        limit: 1,
+    }).send();
+    const features = await geoData.body.features;
+    const geometry = features[0].geometry;
     const campground = new Campground(req.body.campground);
-    // campground.geometry = geometry;
+    campground.geometry = geometry;
     campground.images = req.files.map(f => ({
         url: f.path,
         filename: f.filename,
