@@ -15,7 +15,7 @@ const features = temp.map(campground=> ({
 const allCampgroundsDataObject = {type: 'FeatureCollection', features};
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v11',
+    style: 'mapbox://styles/mapbox/light-v11',
     center: [-103.5917, 40.6699],
     zoom: 3
     });
@@ -119,3 +119,4 @@ const map = new mapboxgl.Map({
     map.getCanvas().style.cursor = '';
     });
     });
+    map.addControl(new mapboxgl.NavigationControl());

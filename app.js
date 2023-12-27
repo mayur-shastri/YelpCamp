@@ -24,7 +24,9 @@ const sessionConfig = {
     secret: "thisisabadsecret",
     resave: false,
     saveUninitialized: true,
+    name: 'thisisasession',
     cookie: {
+        // secure: true, // for
         httpOnly: true,
         expires: Date.now() + 1000*60*60*24*7,
         maxAge: 1000*60*60*24*7,
