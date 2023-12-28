@@ -51,7 +51,7 @@
           </nav>
     </div>
     <div class="flex-column d-flex vh-100 justify-content-center align-items-center">
-            <h1 class="display-4">Welcome to YelpCamp</h1>
+            <h1 class="display-4">Welcome to YelpCamp<%= currentUser? `,${currentUser.username}` : ''%>!</h1>
             <p class="lead">Discover amazing campgrounds and connect with fellow campers!</p>
             <div class="mt-4">
                 <a href="/register" class="btn btn-primary btn-lg mx-2">Sign Up</a>
